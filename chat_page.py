@@ -1,7 +1,7 @@
 # chat_page.py
 import streamlit as st
-import pytz
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from db import save_chat, load_chat, save_journal, clear_chat
 from nlp import analyze_sentiment
@@ -9,7 +9,7 @@ from chat_logic import handle_idle_input
 from high_risk import high_risk_support_message
 from chat_ui import render_chat_bubble
 
-MY_TZ = pytz.timezone("Asia/Kuala_Lumpur")
+MY_TZ = ZoneInfo("Asia/Kuala_Lumpur")
 
 # ============================
 # Helper functions
@@ -154,4 +154,5 @@ def show_chat_page():
                 handle_idle_input(user_input.lower(), bot_say, st.session_state)
 
             st.rerun()
+
 
