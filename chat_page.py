@@ -1,5 +1,6 @@
 # chat_page.py
 import streamlit as st
+import pytz
 from datetime import datetime
 
 from db import save_chat, load_chat, save_journal, clear_chat
@@ -8,12 +9,13 @@ from chat_logic import handle_idle_input
 from high_risk import high_risk_support_message
 from chat_ui import render_chat_bubble
 
+MY_TZ = pytz.timezone("Asia/Kuala_Lumpur")
 
 # ============================
 # Helper functions
 # ============================
 def now():
-    return datetime.now().strftime("%Y-%m-%d %H:%M")
+    return datetime.now(MY_TZ).strftime("%Y-%m-%d %H:%M")
 
 
 def bot_say(message):
@@ -152,3 +154,4 @@ def show_chat_page():
                 handle_idle_input(user_input.lower(), bot_say, st.session_state)
 
             st.rerun()
+
